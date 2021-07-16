@@ -81,11 +81,23 @@
                             <ul>
                                 <li>
                                     <i class="fas fa-envelope"></i>
-                                    <p>Email <span><a href="#">{{ $companyinfo->email }}</a></span></p>
+                                    <p>Email <span><a href="#">
+                                        @if(!empty($companyinfo->email))
+                                        {{ $companyinfo->email }}
+                                        @else
+                                            anup9449@gmail.com
+                                        @endif
+                                    </a></span></p>
                                 </li>
                                 <li>
                                     <i class="fas fa-map"></i>
-                                    <p>Office <span>{{ $companyinfo->address }}</span></p>
+                                    <p>Office <span>
+                                        @if(!empty($companyinfo->address))
+                                        {{ $companyinfo->address }}
+                                        @else
+                                            Satpai
+                                        @endif
+                                    </span></p>
                                 </li>
                             </ul>
                             <div class="opening-info">
