@@ -11,13 +11,30 @@
                     <div class="info box">
                             <ul>
                                 <li>
-                                    <span><i class="fas fa-map"></i> Address</span>{{ $companyinfo->address }}
+                                    <span><i class="fas fa-map"></i> Address</span>
+                                    @if(!empty($companyinfo->address))
+                                        {{ $companyinfo->address }}
+                                    @else
+                                        Satpai
+                                    @endif
                                 </li>
                                 <li>
-                                    <span><i class="fas fa-envelope-open"></i> Email</span>{{ $companyinfo->email }}
+                                    <span><i class="fas fa-envelope-open"></i> Email</span>
+                                    @if(!empty($companyinfo->email))
+                                        {{ $companyinfo->email }}
+                                    @else
+                                        anup9449@gmail.com
+                                    @endif
+
                                 </li>
                                 <li>
-                                    <span><i class="fas fa-phone"></i> Contact</span>{{ $companyinfo->contact }}
+                                    <span><i class="fas fa-phone"></i> Contact</span>
+                                    @if(!empty($companyinfo->contact))
+                                        {{ $companyinfo->contact }}
+                                    @else
+                                        12345678
+                                    @endif
+
                                 </li>
                             </ul>
                     </div>
