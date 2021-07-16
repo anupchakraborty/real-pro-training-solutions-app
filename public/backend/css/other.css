@@ -1,0 +1,20 @@
+/* company info */
+.company-info{
+    background-color: rgb(240, 245, 245);
+    border-radius: 10px;
+}
+.company-title {
+    padding: 20px;
+}
+.company-title hr{
+    color: black;
+}
+.company-title h3 {
+    color: rgb(14, 13, 13);
+    font-size: 20px;
+}
+
+.comapny-details {
+    color: rgb(19, 19, 19);
+    font-size: 16px;
+}
