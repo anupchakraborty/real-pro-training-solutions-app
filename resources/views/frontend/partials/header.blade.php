@@ -38,8 +38,12 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" href="index.html">
+                        @if(!empty($companyinfo->logo))
                             <img src="{{ asset('backend/img/'.$companyinfo->logo) }}" class="logo" alt="Logo">
-                    </a>
+                        @else
+
+                        @endif
+                        </a>
                 </div>
                 <!-- End Header Navigation -->
 
