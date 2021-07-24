@@ -15,13 +15,13 @@
     ============================================= -->
         <!-- Start Login
     ============================================= -->
-    @include('frontend.auth.login')
+    @include('frontend.partials.login')
         <!-- End Login
     ============================================= -->
 
         <!-- Start Register
     ============================================= -->
-    @include('frontend.auth.register')
+    @include('frontend.partials.register')
         <!-- End Register
     ============================================= -->
         <!-- Start banner

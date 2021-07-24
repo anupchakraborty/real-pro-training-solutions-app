@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-    Teacher | Real Pro Traning Solutions
+    Teacher | Real Pro Training Solutions
 @endsection
 
 @section('user_content')
@@ -16,6 +16,17 @@
     ============================================= -->
     @include('frontend.partials.header')
         <!-- End Header
+    ============================================= -->
+            <!-- Start Login
+    ============================================= -->
+    @include('frontend.partials.login')
+        <!-- End Login
+    ============================================= -->
+
+        <!-- Start Register
+    ============================================= -->
+    @include('frontend.partials.register')
+        <!-- End Register
     ============================================= -->
     <!-- Start Breadcrumb
     ============================================= -->

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-    Course Details | Real Pro Traning Solutions
+    Course Details | Real Pro Training Solutions
 @endsection
 
 @section('user_content')
@@ -17,6 +17,17 @@
     @include('frontend.partials.header')
         <!-- End Header
     ============================================= -->
+            <!-- Start Login
+    ============================================= -->
+    @include('frontend.partials.login')
+        <!-- End Login
+    ============================================= -->
+
+        <!-- Start Register
+    ============================================= -->
+    @include('frontend.partials.register')
+        <!-- End Register
+    ============================================= -->
         <!-- Start Breadcrumb
     ============================================= -->
     <div class="breadcrumb-area shadow dark text-center bg-fixed text-light" style="background-image: url({{ asset('frontend/assets/img/banner/2.jpg') }});">
@@ -26,7 +37,7 @@
                     <h1>Course Details</h1>
                     <ul class="breadcrumb">
                         <li><a href="{{ route('index') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="{{ route('user.courses') }}">Course</a></li>
+                        <li><a href="{{ route('courses') }}">Course</a></li>
                         <li class="active">Single</li>
                     </ul>
                 </div>
@@ -52,7 +63,7 @@
 
                             <!-- Thumbnail -->
                             <div class="thumb">
-                                <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb">
+                                <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="thumb_img">
                             </div>
                             <!-- End Thumbnail -->
 
@@ -85,9 +96,14 @@
                                     <span>{{ $course->price }} $</span>
                                 </div>
                                 <div class="align-right">
-                                    <a class="btn btn-dark effect btn-sm" href="#">
-                                        <i class="fas fa-chart-bar"></i> Enroll
-                                    </a>
+                                    @if(!empty(Auth::guard('web')->user()->id))
+                                        <input type="hidden" name="user_id" value="{{ Auth::guard('web')->user()->id }}">
+
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                        <a type="button" class="btn btn-dark effect btn-sm" title="Enroll Now" onclick="addTocart({{ $course->id }},{{ Auth::user()->id }})"><i class="fas fa-chart-bar"></i> Enroll</a>
+                                    @else
+                                        <a type="button" class="btn btn-dark effect btn-sm" title="Enroll Now" onclick="addTocart({{ $course->id }})"><i class="fas fa-chart-bar"></i> Enroll</a>
+                                    @endif
                                 </div>
                             </div>
                             <!-- End Course Meta -->
@@ -250,42 +266,18 @@
                                 <div id="tab3" class="tab-pane fade">
                                     <div class="info title">
                                         <div class="advisor-list-items">
+                                            @php
+                                                $admin_id = $course->admin_id;
+                                                $admin = App\Models\Admin::where('id',$admin_id)->first();
+                                            @endphp
                                             <!-- Advisor Item -->
                                             <div class="item">
                                                 <div class="thumb">
-                                                    <img src="assets/img/team/7.jpg" alt="Thumb">
+                                                    <img src="{{ asset('backend/img/admin/'.$admin->image) }}" alt="Thumb">
                                                 </div>
                                                 <div class="info">
-                                                    <h4>Devid Mark</h4>
+                                                    <h4>{{ $admin->name }}</h4>
                                                     <span>senior lecturer</span>
-                                                    <p>
-                                                        Several carried through an of up attempt gravity. Situation to be at offending elsewhere distrusts if. Particular use for considered projection cultivated. Worth of do doubt shall
-                                                    </p>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fab fa-twitter"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fab fa-dribbble"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fab fa-youtube"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!-- End Advisor Item -->
-                                            <!-- Advisor Item -->
-                                            <div class="item">
-                                                <div class="thumb">
-                                                    <img src="assets/img/team/8.jpg" alt="Thumb">
-                                                </div>
-                                                <div class="info">
-                                                    <h4>Andolin Paul</h4>
-                                                    <span>Java Developer</span>
                                                     <p>
                                                         Several carried through an of up attempt gravity. Situation to be at offending elsewhere distrusts if. Particular use for considered projection cultivated. Worth of do doubt shall
                                                     </p>
@@ -376,32 +368,6 @@
                             </div>
                             <!-- End Sidebar Item -->
 
-                            <!-- Sidebar Item -->
-                            <div class="sidebar-item category">
-                                <div class="title">
-                                    <h4>Courses Category</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Java Programming <span>23</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Social Science <span>0</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Business Management <span>12</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Online Learning <span>17</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Course Management <span>0</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Sidebar Item -->
 
                             <!-- Sidebar Item -->
                             <div class="sidebar-item recent-post">

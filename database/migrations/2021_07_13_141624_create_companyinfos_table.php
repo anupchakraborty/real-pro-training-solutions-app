@@ -20,6 +20,7 @@ class CreateCompanyinfosTable extends Migration
             $table->text('address');
             $table->string('email');
             $table->string('contact');
+            $table->unsignedBigInteger('shipping_cost')->default(0);
             $table->timestamps();
         });
     }

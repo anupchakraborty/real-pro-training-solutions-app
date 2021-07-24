@@ -17,6 +17,17 @@
     @include('frontend.partials.header')
         <!-- End Header
     ============================================= -->
+            <!-- Start Login
+    ============================================= -->
+    @include('frontend.partials.login')
+        <!-- End Login
+    ============================================= -->
+
+        <!-- Start Register
+    ============================================= -->
+    @include('frontend.partials.register')
+        <!-- End Register
+    ============================================= -->
     <!-- Start Breadcrumb
     ============================================= -->
     <div class="breadcrumb-area shadow dark text-center bg-fixed text-light" style="background-image: url({{ asset('frontend/assets/img/banner/8.jpg') }});">

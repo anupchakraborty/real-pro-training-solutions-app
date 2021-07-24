@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-    Courses | Real Pro Traning Solutions
+    Courses | Real Pro Training Solutions
 @endsection
 
 @section('user_content')
@@ -16,6 +16,17 @@
     ============================================= -->
     @include('frontend.partials.header')
         <!-- End Header
+    ============================================= -->
+            <!-- Start Login
+    ============================================= -->
+    @include('frontend.partials.login')
+        <!-- End Login
+    ============================================= -->
+
+        <!-- Start Register
+    ============================================= -->
+    @include('frontend.partials.register')
+        <!-- End Register
     ============================================= -->
 
     <!-- Start Breadcrumb
@@ -50,9 +61,9 @@
                                         $slug = Str::slug($course->title);
                                     @endphp --}}
                                     <a href="{{ route('course.details',$course->id) }}">
-                                        <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb">
+                                        <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="popular_image">
                                     </a>
-                                    <div class="price">Price: {{ $course->price }}$</div>
+                                    <div class="price">Price: ${{ $course->price }}</div>
                                 </div>
                                 <div class="info">
                                     <div class="author-info">
@@ -84,7 +95,7 @@
                                                 <i class="fas fa-clock"></i> {{ $course->duration }}.00
                                             </li>
                                         </ul>
-                                        <a href="#">Enroll Now</a>
+                                        @include('frontend.partials.enroll_button')
                                     </div>
                                 </div>
                             </div>

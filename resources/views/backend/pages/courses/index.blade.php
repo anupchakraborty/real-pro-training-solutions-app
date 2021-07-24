@@ -58,7 +58,12 @@
                         <td>{{ $course->feature }}</td>
                         <td>{{ $course->price }} $</td>
                         <td>{{ $course->duration }} Hours</td>
-                        <td>{{ $course->admin_id }}</td>
+                        <td>
+                            @php
+                                $admin = App\Models\Admin::where('id',$course->admin_id)->first();
+                            @endphp
+                            {{ $admin->name }}
+                        </td>
                         <td>{{ $course->image }}</td>
 
                         <td style="text-align:center;">

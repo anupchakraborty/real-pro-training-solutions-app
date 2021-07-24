@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    //cart route are here
+    Route::group(['prefix' => 'carts'], function(){
+        Route::get('/', 'App\Http\Controllers\API\CartController@index')->name('carts');
+        Route::post('/store', 'App\Http\Controllers\API\CartController@store')->name('carts.store');
+        Route::post('/update/{id}', 'App\Http\Controllers\API\CartController@update')->name('carts.update');
+        Route::post('/delete/{id}', 'App\Http\Controllers\API\CartController@destory')->name('carts.delete');
+    });

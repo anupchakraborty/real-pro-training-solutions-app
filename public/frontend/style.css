@@ -104,6 +104,17 @@ img {
   outline: none;
   max-width: 100%;
 }
+#thumb_img {
+    width: -webkit-fill-available;
+    height: 600px;
+}
+#course_image {
+    height: 400px;
+}
+#popular_image {
+    width: -webkit-fill-available;
+    height: 400px;
+}
 
 label {
   display: inline-block;

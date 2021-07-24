@@ -39,7 +39,7 @@
                     </button>
                     <a class="navbar-brand" href="index.html">
                         @if(!empty($companyinfo->logo))
-                            <img src="{{ asset('backend/img/'.$companyinfo->logo) }}" class="logo" alt="Logo">
+                            <img src="{{ asset('backend/img/'.$companyinfo->logo) }}" class="logo" alt="Logo" style="width: 250px; height: 60px">
                         @else
 
                         @endif
@@ -77,6 +77,9 @@
                         </li>
                         <li>
                             <a href="{{ route('contact') }}">contact</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('carts') }}"><i class="fas fa-shopping-cart"></i> <span id="total_items" class="total-count">{{ App\Models\Cart::totalItems() }} Items</span></a>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

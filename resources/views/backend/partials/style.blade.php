@@ -1,3 +1,5 @@
+    <!-- ========== Favicon Icon ========== -->
+    <link rel="shortcut icon" href="{{ asset('backend/img/favicon.png') }}" type="image/x-icon">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{asset('backend/plugins/fontawesome-free/css/all.min.css')}}">
 <!-- Ionicons -->

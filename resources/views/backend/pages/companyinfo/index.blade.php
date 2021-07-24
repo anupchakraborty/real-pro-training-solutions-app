@@ -71,7 +71,7 @@
                                 <h3>Company Logo</h3>
                                 <hr/>
                                 <div class="comapny-details">
-                                    <img src="{{ asset('backend/img/'.$companyinfo->logo) }}" alt="" srcset="">
+                                    <img src="{{ asset('backend/img/'.$companyinfo->logo) }}" alt="" style="width: 250px; height:80px">
                                 </div>
 
                             </div>

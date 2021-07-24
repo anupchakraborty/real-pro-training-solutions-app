@@ -40,10 +40,24 @@ Auth::routes();
 		Route::get('/token/{token}', 'App\Http\Controllers\Auth\VerificationController@verify')->name('user.verification');
         Route::get('dashboard/', 'App\Http\Controllers\Frontend\DashboardController@index')->name('dashboard');
         Route::get('profile/', 'App\Http\Controllers\Frontend\DashboardController@profile')->name('user.profile');
+        Route::get('dashboard/contant/{id}', 'App\Http\Controllers\Frontend\DashboardController@contant')->name('user.contant');
+
+    });
+    //Carts Route are here
+    Route::group(['prefix' => 'carts'], function(){
+        Route::get('/', 'App\Http\Controllers\Frontend\CartController@index')->name('carts');
+        Route::post('/store', 'App\Http\Controllers\Frontend\CartController@store')->name('carts.store');
+        Route::post('/update/{id}', 'App\Http\Controllers\Frontend\CartController@update')->name('carts.update');
+        Route::post('/delete/{id}', 'App\Http\Controllers\Frontend\CartController@destroy')->name('carts.delete');
+    });
+    //checkouts route are here
+    Route::group(['prefix' => 'checkouts'], function(){
+        Route::get('/', 'App\Http\Controllers\Frontend\CheckOutController@index')->name('checkouts');
+        Route::post('/store', 'App\Http\Controllers\Frontend\CheckOutController@store')->name('checkouts.store');
     });
 
 
-    /*----------------------------------------------
+    /*-----------------------------------------------
         Backend route are here
     |-----------------------------------------------*/
 Route::group(['prefix' => 'admin'], function(){

@@ -59,7 +59,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputlogo" class="form-label">Old Logo</label><br>
-                            <img src="{{ asset('backend/img/'.$editinfo->logo) }}" alt="Logo">
+                            <img src="{{ asset('backend/img/'.$editinfo->logo) }}" alt="Logo" style="width: 300px; height:300px">
                             <input type="hidden" name="old_logo" value="{{ $editinfo->logo }}">
                         </div>
                         <div class="mb-3">

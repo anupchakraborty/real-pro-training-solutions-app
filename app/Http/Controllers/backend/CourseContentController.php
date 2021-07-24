@@ -119,8 +119,8 @@ class CourseContentController extends Controller
         }
 
         $coursecontent = Coursecontent::find($id);
-        $course = Course::all();
-        return view('backend.pages.courses.course_content.edit', compact('coursecontent','course'));
+        $courses = Course::all();
+        return view('backend.pages.courses.course_content.edit', compact('coursecontent','courses'));
     }
 
     /**
@@ -132,7 +132,40 @@ class CourseContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validation Data
+        $request->validate([
+            'title' => 'required|max:100',
+            'course_id' => 'required',
+            'desctription' => 'required|max:500',
+        ]);
+        //dd($request->all());
+
+        // Create New Admin
+        $coursecontent = Coursecontent::find($id);
+        $coursecontent->title = $request->title;
+        $coursecontent->course_id = $request->course_id;
+        $coursecontent->desctription = $request->desctription;
+
+        if ($request->hasfile('file')) {
+            unlink('backend/courses_content/'.$request->old_file);
+       		// File store in public folder------
+	  		$file = $request->file('file'); //catch File from input field
+	    	$extension = $file->getClientOriginalExtension(); //File extension define
+            $filename = time().'.'.$extension; //File filename define
+	    	$file->move('backend/courses_content/',$filename); //File location define im public folder
+	    	$coursecontent->file = $filename; //File name save in db
+	    }else{
+            $coursecontent->file = $request->old_file;
+        }
+
+        //dd($coursecontent);
+
+        $coursecontent->save();
+        $notification = array(
+           'message' => 'Course Content has been updated !!',
+           'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
     }
 
     /**

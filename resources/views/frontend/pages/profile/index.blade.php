@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('title')
-    Profile | Real Pro Traning Solutions
+    Profile | Real Pro Training Solutions
 @endsection
 
 @section('user_content')

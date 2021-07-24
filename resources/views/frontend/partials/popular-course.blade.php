@@ -20,9 +20,9 @@
                             <div class="item">
                                 <div class="thumb">
                                     <a href="#">
-                                        <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb">
+                                        <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="course_image">
                                     </a>
-                                    <div class="price">Price: {{ $course->price }}$</div>
+                                    <div class="price">Price: ${{ $course->price }}</div>
                                 </div>
                                 <div class="info">
                                     <div class="author-info">
@@ -54,7 +54,7 @@
                                                 <i class="fas fa-clock"></i> {{ $course->duration }}:00
                                             </li>
                                         </ul>
-                                        <a href="#">Enroll Now</a>
+                                        @include('frontend.partials.enroll_button')
                                     </div>
                                 </div>
                             </div>

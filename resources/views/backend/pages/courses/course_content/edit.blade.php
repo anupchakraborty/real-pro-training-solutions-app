@@ -43,6 +43,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('admin.course.content.update',$coursecontent->id) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
 
                     <div class="form-group col-md-12">
@@ -53,11 +54,12 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                     <div class="form-group col-md-12">
-                        <label for="course_id">Author</label>
+                        <label for="course_id">Courses</label>
                         <select name="course_id" id="course_id" class="form-control">
                             <option checked>Select One Course</option>
-                            <option value="1">Course 1</option>
-                            <option value="2">Course 2</option>
+                            @foreach($courses as $course)
+                                <option value="{{ $course->id }}" {{ ($coursecontent->course_id == $course->id)? 'selected':'' }}>{{ $course->title }}</option>
+                            @endforeach
                         </select>
                     </div>
                     @error('course_id')

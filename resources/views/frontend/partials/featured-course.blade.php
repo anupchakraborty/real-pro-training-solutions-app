@@ -32,7 +32,7 @@
                                 <ul>
                                     {{ $course->desctription }}
                                 </ul>
-                                <a href="#" class="btn btn-theme effect btn-md" data-animation="animated slideInUp">Enroll Now</a>
+
                                 <div class="bottom-info align-left">
                                     <div class="item">
                                         <h4>Author</h4>
