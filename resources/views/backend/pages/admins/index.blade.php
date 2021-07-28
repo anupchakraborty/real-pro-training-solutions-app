@@ -48,6 +48,9 @@
             </thead>
             <tbody>
                 @foreach ($admins as $admin)
+                  @if($admin->username == 'superadmin')
+
+                  @else
                 <tr>
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ $admin->name }}</td>
@@ -98,6 +101,7 @@
                     </td>
                   @endif
                 </tr>
+                @endif
             @endforeach
             </tbody>
             <tfoot>

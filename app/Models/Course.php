@@ -15,4 +15,9 @@ class Course extends Model
     {
     	return $this->belongsTo(Admin::class);
     }
+
+    public function contents()
+    {
+    	return $this->hasMany(Coursecontent::class);
+    }
 }

@@ -7,12 +7,12 @@
 @section('login_content')
 <div class="login-box">
     <div class="login-logo">
-        <a href=""><b>Real Pro</b>Traning Solutions</a>
+        <a href="{{ route('index') }}"><img src="{{ asset('backend/img/16265525412.png') }}" alt="" style="width: 250px; height:120px"></a>
       </div>
   <!-- /.login-logo -->
-  <div class="card">
+  <div class="card rounded-4 shadow p-3 mb-5 bg-white rounded">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Admin Panel Sign IN</p>
+      <p class="login-box-msg text-primary font-weight-bold">Admin Panel Sign In</p>
 
 
       @include('backend.partials.message')

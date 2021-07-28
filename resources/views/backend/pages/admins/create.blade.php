@@ -77,7 +77,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-6 col-sm-12">
                         <label for="username">Admin Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username" required>
+                        <select name="username" id="username" required>>
+                            <option selected>Select A Admin Role</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="sysadmin">System Admin</option>
+                            <option value="sysowner">System Owner</option>
+                        </select>
                     </div>
                     @error('username')
                         <span class="text-danger">{{ $message }}</span>

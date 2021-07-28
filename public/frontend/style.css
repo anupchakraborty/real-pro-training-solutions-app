@@ -3389,7 +3389,7 @@ body, .banner-area,
   color: #ffffff;
   font-family: "Poppins",sans-serif;
   font-weight: 600;
-  padding: 0 20px;
+  padding: 4px 20px;
   position: absolute;
   right: 0;
   text-transform: capitalize;
@@ -3437,6 +3437,21 @@ body, .banner-area,
   position: relative;
   right: 0;
   text-align: center;
+}
+
+.course-details-area .sidebar .sidebar-item.category li a {
+  display: flex;
+  padding-left: 10px;
+}
+
+.course-details-area .sidebar .sidebar-item.category li a i {
+  margin-top: 7px;
+  padding-right: 10px;
+}
+
+.course-details-area .sidebar .sidebar-item.category li a.active{
+  background-color: #d9e9fc;
+  padding-top: 10px ;
 }
 
 .course-details-area .sidebar .sidebar-item.recent-post h4 a {

@@ -33,6 +33,22 @@
                                     {{ $course->desctription }}
                                 </ul>
 
+                                <form class="form-inline" action="{{ route('carts.store') }}" method="POST">
+                                    @csrf
+                                
+                                    @if(!empty(Auth::guard('web')->user()->id))
+                                        <input type="hidden" name="user_id" value="{{ Auth::guard('web')->user()->id }}">
+                                
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+
+                                            <a type="button" title="Enroll Now" onclick="addTocart({{ $course->id }},{{ Auth::user()->id }})" class="btn btn-theme effect btn-md" data-animation="animated slideInUp">Enroll Now</a>
+                                        @else
+                                            <a type="button" title="Enroll Now" onclick="addTocart({{ $course->id }})" class="btn btn-theme effect btn-md" data-animation="animated slideInUp">Enroll Now</a>
+
+                                    @endif
+                                </form>
                                 <div class="bottom-info align-left">
                                     <div class="item">
                                         <h4>Author</h4>
@@ -42,7 +58,15 @@
                                     </div>
                                     <div class="item">
                                         <h4>Students enrolled</h4>
-                                        <span>5455</span>
+                                        @php
+                                            $carts = App\Models\Cart::where('course_id',$course->id)
+                                                                    ->whereNotNull('order_id')
+                                                                    ->get();
+                
+                                            $enroll_students = count($carts);
+
+                                        @endphp
+                                        <span>{{ $enroll_students }}</span>
                                     </div>
                                     <div class="item">
                                         <h4>Rating</h4>

@@ -67,7 +67,20 @@
                 <div class="form-row">
                     <div class="form-group col-md-6 col-sm-12">
                         <label for="username">Admin Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="{{ $admin->username }}">
+                        <select name="username"  class="form-control" id="username" required>
+                            @php
+                                $admins = App\Models\Admin::all();
+                            @endphp
+                            @foreach($admins as $adminrole)
+                                @if($adminrole->username == 'superadmin')
+
+                                @else
+                                    <option value="{{ $adminrole->username }}" {{ ($admin->username == $adminrole->username) ? 'selected' : '' }}>
+                                    {{ $adminrole->username }}
+                                </option> 
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-md-6 col-sm-12">
                         <label for="password">Assign Roles</label>

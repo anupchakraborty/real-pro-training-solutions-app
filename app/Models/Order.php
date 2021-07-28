@@ -22,4 +22,8 @@ class Order extends Model
     public function carts(){
         return $this->belongsTo(Cart::class);
     }
+
+    public function payment(){
+        return $this->belongsTo(Payment::class);
+    }
 }

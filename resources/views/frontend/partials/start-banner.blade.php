@@ -5,63 +5,27 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner text-light carousel-zoom">
-                <div class="item active">
-                    <div class="slider-thumb bg-fixed" style="background-image: url(frontend/assets/img/banner/1.jpg);"></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">Reach you career</h3>
-                                            <h1 data-animation="animated slideInUp">Learn from best online training course</h1>
-                                            <a data-animation="animated slideInUp" class="btn btn-light border btn-md" href="#">Learn more</a>
-                                            <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="#">View Courses</a>
+                @foreach($sliders as $slider)
+                    <div class="item {{ ($slider->id == 1)? 'active': '' }}">
+                        <div class="slider-thumb bg-fixed" style="background-image: url(backend/img/slider/{{ $slider->image }});"></div>
+                        <div class="box-table shadow dark">
+                            <div class="box-cell">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="content">
+                                                <h3 data-animation="animated slideInLeft">{{ $slider->heading }}</h3>
+                                                <h1 data-animation="animated slideInUp">{{ $slider->title }}</h1>
+                                                <a data-animation="animated slideInUp" class="btn btn-light border btn-md" href="#">Learn more</a>
+                                                <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="{{ route('courses') }}">View Courses</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="slider-thumb bg-fixed" style="background-image: url(frontend/assets/img/banner/2.jpg);"></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">We're glade to see you</h3>
-                                            <h1 data-animation="animated slideInUp">explore our brilliant graduates</h1>
-                                            <a data-animation="animated slideInUp" class="btn btn-light border btn-md" href="#">Learn more</a>
-                                            <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="#">View Courses</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="slider-thumb bg-fixed" style="background-image: url(frontend/assets/img/banner/3.jpg);"></div>
-                    <div class="box-table shadow dark">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="content">
-                                            <h3 data-animation="animated slideInLeft">The goal of education</h3>
-                                            <h1 data-animation="animated slideInUp">Join the bigest comunity of eduka</h1>
-                                            <a data-animation="animated slideInUp" class="btn btn-light border btn-md" href="#">Learn more</a>
-                                            <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="#">View Courses</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <!-- End Wrapper for slides -->
 

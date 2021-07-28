@@ -164,6 +164,11 @@
                                             Placing assured be if removed it besides on. Far shed each high read are men over day. Afraid we praise lively he suffer family estate is. Ample order up in of in ready. Timed blind had now those ought set often which. Or snug dull he show more true wish. No at many deny away miss evil. On in so indeed spirit an mother. Amounted old strictly but marianne admitted. People former is remove remain as.
                                         </p>
                                         <h4>List Of Courses</h4>
+                                        @php
+                                            $teacher_id = $course->admin_id;
+                                            $courses = App\Models\Course::where('admin_id',$teacher_id)->get();
+                                        @endphp
+                                        @foreach($courses as $course)
                                         <!-- Start Course List -->
                                         <div class="course-list-items acd-items acd-arrow">
                                             <div class="panel-group symb" id="accordion">
@@ -171,39 +176,39 @@
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#ac1">
-                                                                Java Programming
+                                                                {{ $course->title }}
                                                             </a>
                                                         </h4>
                                                     </div>
                                                     <div id="ac1" class="panel-collapse collapse in">
                                                         <div class="panel-body">
                                                             <ul>
+                                                                @php
+                                                                    $contents = App\Models\CourseContent::where('course_id',$course->id)->get();
+                                                                @endphp
+                                                                @foreach($contents as $key => $content)
                                                                 <li>
                                                                     <div class="item name">
                                                                         <i class="fas fa-play"></i>
-                                                                        <span>Lecture 1.1</span>
+                                                                        <span>Lecture {{ $key+1 }}</span>
                                                                     </div>
                                                                     <div class="item title">
-                                                                        <h5>Introduction of java</h5>
+                                                                        <h5>{{ $content->title }}</h5>
                                                                     </div>
                                                                     <div class="item info">
-                                                                        <span>Duration: 1 hours 30 min</span>
+                                                                        <span>Duration: 
+                                                                            @php
+                                                                                $getID3 = new getID3;
+                                                                                $file = $getID3->analyze($content->file);
+                                                                            @endphp
+                                                                            
+                                                                             {{ $file['playtime_string'] }}
+                                                                            {{-- 1 hours 30 min --}}
+                                                                        </span>
                                                                        <a href="#">Preview</a>
                                                                     </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="item name">
-                                                                        <i class="fas fa-file"></i>
-                                                                        <span>Lecture 1.2</span>
-                                                                    </div>
-                                                                    <div class="item title">
-                                                                        <h5>Basic development</h5>
-                                                                    </div>
-                                                                    <div class="item info">
-                                                                        <span>Duration: 3 hours 15 min</span>
-                                                                        <a href="#">Preview</a>
-                                                                    </div>
-                                                                </li>
+                                                                </li>                                                                   
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -211,53 +216,7 @@
                                             </div>
                                         </div>
                                         <!-- End Course List -->
-                                        <!-- Start Course List -->
-                                        <div class="course-list-items acd-items acd-arrow">
-                                            <div class="panel-group symb" id="accordion">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#ac2">
-                                                                PHP Programmig
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="ac2" class="panel-collapse collapse">
-                                                        <div class="panel-body">
-                                                            <ul>
-                                                                <li>
-                                                                    <div class="item name">
-                                                                        <i class="fas fa-play"></i>
-                                                                        <span>Lecture 1.1</span>
-                                                                    </div>
-                                                                    <div class="item title">
-                                                                        <h5>Introduction</h5>
-                                                                    </div>
-                                                                    <div class="item info">
-                                                                        <span>Duration: 1 hours 30 min</span>
-                                                                       <a href="#">Preview</a>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="item name">
-                                                                        <i class="fas fa-file"></i>
-                                                                        <span>Lecture 1.2</span>
-                                                                    </div>
-                                                                    <div class="item title">
-                                                                        <h5>Benifits of function</h5>
-                                                                    </div>
-                                                                    <div class="item info">
-                                                                        <span>Duration: 2 hours 12 min</span>
-                                                                        <a href="#">Preview</a>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End Course List -->
+                                        @endforeach
                                     </div>
                                 </div>
                                 <!-- End Single Tab -->

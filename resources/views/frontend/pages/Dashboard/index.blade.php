@@ -17,89 +17,89 @@
     ============================================= -->
 
 
-    <!-- Start Content With Left Sidebar
+    <!-- Start Content With Unregistered User
     ============================================= -->
     @php
         $id = Auth::guard('web')->user()->id;
-        $orders = App\Models\Order::where('user_id',$id)->get();
-        foreach ($orders as $order) {
-            $complete_order = App\Models\Cart::where('order_id',$order->id)
-                                ->first();
-        }
+        $carts = App\Models\Cart::where('user_id',$id)->get();
     @endphp
-    @if(!empty($complete_order))
-
-        @php
-            $course = App\Models\Course::where('id',$complete_order->course_id)->first();
-            $contents = App\Models\Coursecontent::where('course_id',$course->id)->get();
-        @endphp
-        <div class="faq-area left-sidebar course-details-area default-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="site-heading text-center">
-                        <div class="col-md-8 col-md-offset-2">
-                            @php
-                                $teacher = App\Models\Admin::where('id',$course->admin_id)->first();
-                            @endphp
-                            <h2>{{ $course->title }} by {{ $teacher->name }}</h2>
-                        </div>
+    @if(count($carts) > 0)
+    <div class="faq-area left-sidebar course-details-area default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="site-heading text-center">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2>Your Courses</h2>
                     </div>
                 </div>
+            </div>
+            <div class="popular-courses-items">
                 <div class="row">
-                    <!-- Start Sidebar -->
-                    <div class="left-sidebar col-md-4">
-                        <div class="sidebar">
-                            <aside>
-                                <!-- Sidebar Item -->
-                                <div class="sidebar-item search">
-                                    <div class="sidebar-info">
-                                        <form>
-                                            <input type="text" placeholder="Course name" class="form-control">
-                                            <input type="submit" value="search">
-                                        </form>
+                    @foreach($carts as $cart)
+                        @if($cart->order_id == NULL))
+
+                            @include('frontend.partials.popular-course')
+
+                        @else
+                            @php
+                                $order = App\Models\Order::where('id',$cart->order_id)->first();
+                                $complete_order = App\Models\Cart::where('order_id',$order->id)->first();
+                                $courses = App\Models\Course::where('id',$complete_order->course_id)->get();
+                            @endphp
+                            
+                            @foreach($courses as $course)
+                                <!-- Single Item -->
+                                <div class="col-md-4 col-sm-6 equal-height">
+                                    <div class="item">
+                                        <div class="thumb">
+                                            {{-- @php
+                                                $slug = Str::slug($course->title);
+                                            @endphp --}}
+                                            <a href="{{ route('course.details',$course->id) }}">
+                                                <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="popular_image">
+                                            </a>
+                                            <div class="price">Price: ${{ $course->price }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="author-info">
+                                                <div class="thumb">
+                                                    <a href="#"><img src="{{ asset('backend/img/admin/'.$course->admin->image) }}" alt="Thumb"></a>
+                                                </div>
+                                                <div class="others">
+                                                    <a href="#">{{ $course->admin->name }}</a>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                        <span>4.5 (23,890)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4><a href="{{ route('course.details',$course->id) }}">{{ $course->title }}</a></h4>
+                                            <p>
+                                                {{ $course->desctription }}
+                                            </p>
+                                            <div class="bottom-info">
+                                                <a class="start-course" href="{{ route('user.contant',$course->id) }}">Start Now</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- End Sidebar Item -->
-
-                                <!-- Sidebar Item -->
-                                <div class="sidebar-item category">
-                                    <div class="title">
-                                        <h4>Your Course</h4>
-                                    </div>
-                                    <div class="sidebar-info">
-                                        <ul>
-                                            @foreach($contents as $key => $content)
-                                                <li>
-                                                    <a href="{{ route('user.contant',$content->id) }}">{{ $key+1 }}. {{ $content->title }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- End Sidebar Item -->
-                            </aside>
-                        </div>
-                    </div>
-                    <!-- End Sidebar -->
-
+                                <!-- End Single Item -->
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
-    @else
-
-    @endif
-    <!-- End Content -->
-
-            <!-- Start popular course
-    ============================================= -->
-    @if(!empty($order))
-
+    </div>
     @else
         @include('frontend.partials.popular-course')
     @endif
-        <!-- End popular course
+        <!-- End Content With Unregistered User
     ============================================= -->
-
 
         <!-- Start Footer
     ============================================= -->

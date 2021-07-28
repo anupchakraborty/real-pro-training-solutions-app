@@ -79,14 +79,14 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>25</h3>
+                <h3>{{ $total_order }}</h3>
 
                 <p>Total Order</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="{{-- route('admin.polls.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('admin.orders.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

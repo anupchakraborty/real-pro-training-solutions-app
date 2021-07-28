@@ -68,7 +68,7 @@ $usr = Auth::guard('admin')->user();
           @if ($usr->can('admin.create') || $usr->can('admin.view') ||  $usr->can('admin.edit') ||  $usr->can('admin.delete'))
           <li class="nav-item has-treeview {{ Route::is('admin.admins.create') || Route::is('admin.admins.index') || Route::is('admin.admins.edit') || Route::is('admin.admins.show') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-user-secret"></i>
               <p>  Admins  <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -95,7 +95,7 @@ $usr = Auth::guard('admin')->user();
           @if ($usr->can('course.create') || $usr->can('course.view') ||  $usr->can('course.edit') ||  $usr->can('course.delete'))
           <li class="nav-item has-treeview {{ Route::is('admin.course.create') || Route::is('admin.course.index') || Route::is('admin.course.edit') || Route::is('admin.course.show') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fab fa-cloudscale"></i>
               <p>  Courses  <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -135,6 +135,36 @@ $usr = Auth::guard('admin')->user();
             </ul>
           </li>
           @endif
+          <li class="nav-item has-treeview {{ Route::is('admin.orders.create') || Route::is('admin.orders.index') || Route::is('admin.orders.edit') || Route::is('admin.orders.show') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-cloudscale"></i>
+              <p>  Orders  <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ Route('admin.orders.index') }}" class="nav-link {{ route::is('admin.orders.index')  ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Orders</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview {{ Route::is('admin.sliders.index') || Route::is('admin.sliders.edit') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+              <p>  Sliders  <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.sliders.index') }}" class="nav-link {{ route::is('admin.sliders.index')  ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                  <p>All Slider</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item has-treeview {{ Route::is('admin.users.create') || Route::is('admin.users.index') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
@@ -152,14 +182,20 @@ $usr = Auth::guard('admin')->user();
           </li>
           <li class="nav-item has-treeview {{ Route::is('admin.companyinfo.index') || Route::is('admin.companyinfo.edit') || Route::is('admin.companyinfo.update') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+                <i class="nav-icon fas fa-clipboard-list"></i>
               <p>  Company Info  <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.companyinfo.index') }}" class="nav-link {{ route::is('admin.companyinfo.index')  ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-users"></i>
+                <a href="{{ route('admin.about.index') }}" class="nav-link {{ Route::is('admin.about.index')  ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                  <p>About Section</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.companyinfo.index') }}" class="nav-link {{ Route::is('admin.companyinfo.index')  ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-circle"></i>
                   <p>All Info</p>
                 </a>
               </li>

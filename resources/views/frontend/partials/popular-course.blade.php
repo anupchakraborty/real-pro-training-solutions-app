@@ -19,7 +19,7 @@
                             <!-- Single Item -->
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="#">
+                                    <a href="{{ route('course.details',$course->id) }}">
                                         <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="course_image">
                                     </a>
                                     <div class="price">Price: ${{ $course->price }}</div>
@@ -41,14 +41,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h4><a href="#">{{ $course->title }}</a></h4>
+                                    <h4><a href="{{ route('course.details',$course->id) }}">{{ $course->title }}</a></h4>
                                     <p>
-                                        {{ $course->desctription }}
+                                        {{ \Illuminate\Support\Str::limit($course->desctription, 150, $end='...') }}
                                     </p>
                                     <div class="bottom-info">
                                         <ul>
                                             <li>
-                                                <i class="fas fa-user"></i> 6,690
+                                                @php
+                                                    $carts = App\Models\Cart::where('course_id',$course->id)
+                                                                            ->whereNotNull('order_id')
+                                                                            ->get();
+                        
+                                                    $enroll_students = count($carts);
+
+                                                @endphp
+                                                <i class="fas fa-user"></i> {{ $enroll_students }}
                                             </li>
                                             <li>
                                                 <i class="fas fa-clock"></i> {{ $course->duration }}:00

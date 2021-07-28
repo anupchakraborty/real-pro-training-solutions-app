@@ -107,11 +107,13 @@
                                 Occasional terminated insensible and inhabiting gay. So know do fond to half on. Now who promise was justice new winding
                             </p>
                         </div>
-                        <form action="https://webhunt.store/themeforest/examin/assets/mail/contact.php" method="POST" class="contact-form">
+
+                        <form action="{{ route('send.email') }}" method="POST" >
+                            @csrf
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="form-group">
-                                        <input class="form-control" id="name" name="name" placeholder="Name" type="text">
+                                        <input class="form-control" name="name" placeholder="Name" type="text">
                                         <span class="alert-error"></span>
                                     </div>
                                 </div>
@@ -119,7 +121,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="form-group">
-                                        <input class="form-control" id="email" name="email" placeholder="Email*" type="email">
+                                        <input class="form-control" name="email" placeholder="Email*" type="email">
                                         <span class="alert-error"></span>
                                     </div>
                                 </div>
@@ -127,7 +129,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="form-group">
-                                        <input class="form-control" id="phone" name="phone" placeholder="Phone" type="text">
+                                        <input class="form-control" name="subject" placeholder="Subject" type="text">
                                         <span class="alert-error"></span>
                                     </div>
                                 </div>
@@ -135,13 +137,13 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="form-group comments">
-                                        <textarea class="form-control" id="comments" name="comments" placeholder="Tell Me About Courses *"></textarea>
+                                        <textarea class="form-control" name="content" placeholder="Tell Me About Courses *"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
-                                    <button type="submit" name="submit" id="submit">
+                                    <button type="submit">
                                         Send Message <i class="fa fa-paper-plane"></i>
                                     </button>
                                 </div>

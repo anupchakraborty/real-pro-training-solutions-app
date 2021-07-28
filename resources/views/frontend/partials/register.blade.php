@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Your Password*" type="text">
+                            <input class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Your Password*" type="password">
                         </div>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Repeat Password*" type="text">
+                            <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Repeat Password*" type="password">
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control @error('image') is-invalid @enderror" name="image" placeholder="Enter Your Phone No*" type="file">
+                            <input class="form-control @error('image') is-invalid @enderror" name="image" type="file">
                         </div>
                         @error('image')
                             <span class="text-danger">{{ $message }}</span>

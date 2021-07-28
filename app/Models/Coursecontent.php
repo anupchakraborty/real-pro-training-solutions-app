@@ -12,4 +12,9 @@ class Coursecontent extends Model
     protected $fillable = [
         'course_id', 'title', 'desctription','file'
     ];
+
+    public function course()
+    {
+    	return $this->belongsTo(Course::class);
+    }
 }

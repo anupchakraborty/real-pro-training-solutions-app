@@ -1,3 +1,4 @@
+    
     <!-- Start Fun Factor 
     ============================================= -->
     <div class="fun-factor-area default-padding bottom-less text-center bg-fixed shadow dark-hard" style="background-image: url(assets/img/banner/2.jpg);">
@@ -20,7 +21,11 @@
                             <i class="flaticon-professor"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="128" data-speed="5000"></span>
+                            @php
+                                $teachers = App\Models\Admin::where('username','teacher')->get();
+                                $total_teacher = count($teachers);
+                            @endphp
+                            <span class="timer" data-to="{{ $total_teacher }}" data-speed="5000"></span>
                             <span class="medium">Best Teachers</span>
                         </div>
                     </div>
@@ -31,7 +36,11 @@
                             <i class="flaticon-online"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="8970" data-speed="5000"></span>
+                            @php
+                                $students = App\Models\Order::select('user_id')->get();
+                                $total_enroll_student = count($students);
+                            @endphp
+                            <span class="timer" data-to="{{ $total_enroll_student }}" data-speed="5000"></span>
                             <span class="medium">Students Enrolled</span>
                         </div>
                     </div>
@@ -42,7 +51,11 @@
                             <i class="flaticon-reading"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="640" data-speed="5000"></span>
+                            @php
+                                $courses = App\Models\Course::select('id')->get();
+                                $total_courses = count($courses);
+                            @endphp
+                            <span class="timer" data-to="{{ $total_courses }}" data-speed="5000"></span>
                             <span class="medium">Cources</span>
                         </div>
                     </div>

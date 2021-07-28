@@ -38,21 +38,33 @@ class DashboardController extends Controller
        return view('frontend.pages.profile.index',compact('user','companyinfo'));
     }
 
-    public function contant($cid)
+    public function course($course_id)
     {
         $id = Auth::guard('web')->user()->id;
         $user = User::where('id', $id)->first();
         $companyinfo = Companyinfo::first();
-        $orders = Order::where('user_id',$id)->get();
-        foreach($orders as $order){
-            $complete_order = Cart::where('order_id',$order->id)->first();
-            $course = Course::where('id',$complete_order->course_id)->first();
-            $contents = Coursecontent::where('course_id',$course->id)->get();
-        }
-        $course_contant = Coursecontent::where('id',$cid)->first();
+        $course = Course::where('id',$course_id)->first();
+        $contents = Coursecontent::where('course_id',$course->id)->get();
 
-        //dd($course_contant->title);
-        return view('frontend.pages.dashboard.content',compact('user','companyinfo','course_contant','course','order','contents'));
+        //dd($course_contant);
+        return view('frontend.pages.dashboard.content',compact('user','companyinfo','course','contents'));
+    }
+
+    public function course_contant($content_id)
+    {
+        $id = Auth::guard('web')->user()->id;
+        $user = User::where('id', $id)->first();
+        $companyinfo = Companyinfo::first();
+
+        $course_contant = Coursecontent::where('id',$content_id)->first();
+        $course = Course::where('id',$course_contant->course_id)->first();
+        $contents = Coursecontent::where('course_id',$course->id)->get();
+
+        $view_content = Coursecontent::find($content_id);
+        $view_content->view_status = 1;
+        $view_content->save();
+
+        return view('frontend.pages.dashboard.view_content',compact('user','companyinfo','course','contents','course_contant'));
     }
 
 }

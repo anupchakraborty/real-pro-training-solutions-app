@@ -68,14 +68,14 @@
 
         <!-- Start Event
     ============================================= -->
-    @include('frontend.partials.event')
+    @include('frontend.partials.faq')
         <!-- End Event
     ============================================= -->
 
-        <!-- Start Regsistion
+        <!-- Start registation
     ============================================= -->
-    @include('frontend.partials.regsistion')
-        <!-- End Regsistion
+    @include('frontend.partials.registation')
+        <!-- End registation
     ============================================= -->
 
         <!-- Start Testimonial

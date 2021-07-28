@@ -4,8 +4,9 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Companyinfo;
 use Illuminate\Http\Request;
+
+use App\Models\Companyinfo;
 
 class CompanyinfoController extends Controller
 {

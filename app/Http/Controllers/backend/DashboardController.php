@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -31,9 +34,9 @@ class DashboardController extends Controller
         $total_admin = count(Admin::select('id')->get());
         $total_user = count(User::select('id')->get());
         $total_course = count(Course::select('id')->get());
-        // $total_question = count(Question::select('id')->get());
+        $total_order = count(Order::select('id')->get());
 
-        return view('backend.pages.dashboard.index',compact('total_admin','total_user','total_course'));
+        return view('backend.pages.dashboard.index',compact('total_admin','total_user','total_course','total_order'));
     }
 
     public function profile()

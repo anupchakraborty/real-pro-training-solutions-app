@@ -35,7 +35,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Checkouts</h1>
+                    <h1>Checkout</h1>
                     <ul class="breadcrumb">
                         <li><a href="{{ route('index') }}"><i class="fas fa-home"></i> Home</a></li>
                         <li class="active">Checkouts</li>
@@ -51,7 +51,8 @@
     <section class="shop checkout section">
         <div class="container">
             <!-- Form -->
-            <form class="form" method="POST" action="{{ route('checkouts.store') }}">
+            <form role="form" class="form" method="POST" action="{{ route('checkouts.store') }}">
+
                 @csrf
                 <div class="row">
                     <div class="col-lg-8 col-12">
@@ -91,7 +92,7 @@
 									</div>
                                     <div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
-											<label>Shipping Address<span>*</span></label>
+											<label>Billing Address<span>*</span></label>
 											<input type="text" name="shipping_address" placeholder="" required="required">
 										</div>
 									</div>
@@ -126,7 +127,11 @@
                                             @endphp
                                             ${{ $shipping_cost }}</span>
                                         </li>
-                                        <li class="last">Total<span>${{ $total_price + $shipping_cost }}</span></li>
+                                        @php
+                                            $grand_total = $total_price + $shipping_cost;
+                                        @endphp
+                                        <li class="last">Total<span>${{ $grand_total }}</span></li>
+                                        <input type="hidden" name="grand_total" value="{{ $grand_total }}">
                                     </ul>
                                 </div>
                             </div>
@@ -135,16 +140,17 @@
 							<div class="single-widget">
 								<h2>Payments</h2>
 								<div class="content">
-									<div class="paymentscheckbox">
-                                        @php
-                                            $payments_type = App\Models\Payment::all();
-                                        @endphp
-                                        <select name="payment_id" id="">
-                                            <option selected>Select Your Payment Method</option>
-                                            @foreach($payments_type as $payment_type)
-                                                <option value="{{ $payment_type->id }}">{{ $payment_type->name }}</option>
-                                            @endforeach
-                                        </select>
+                                    @php
+                                        $payments_type = App\Models\Payment::all();
+                                    @endphp
+
+                                    <div class="checkbox">
+                                        @foreach ($payments_type as $payment_type)
+                                            <label class="checkbox" for="1">
+                                                <input name="payment_method" id="{{ $payment_type->payment_type }}" type="checkbox" value="{{ $payment_type->id }}"> 
+                                                <p>{{ $payment_type->name }}</p>
+                                            </label>
+                                        @endforeach
 									</div>
 								</div>
 							</div>
@@ -160,7 +166,7 @@
                             <div class="single-widget get-button">
                                 <div class="content">
                                     <div class="button">
-                                        <button type="submit" class="btn">proceed to checkout</button>
+                                        <button type="submit" onclick="return selectPaymentMethod();" class="btn">proceed to checkout</button>
                                     </div>
                                 </div>
                             </div>
@@ -185,4 +191,17 @@
     @include('frontend.partials.footer')
         <!-- End Footer
     ============================================= -->
+@endsection
+
+@section('scripts')
+<script>
+    function selectPaymentMethod(){
+      if($('#stripe').is(':checked') || $('#cash_on_delivery').is(':checked')){
+        //alert('checked');
+      }else{
+        alert('Please Select Payment Method');
+        return false;
+      }
+    }
+</script>
 @endsection

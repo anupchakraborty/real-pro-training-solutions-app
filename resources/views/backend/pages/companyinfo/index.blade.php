@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    Admin | Real Pro Training Solutions Admin Dashboard
+    Company Info | Admin Dashboard - Real Pro Training Solutions
 @endsection
 
 @section('admin_content')
@@ -16,7 +16,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
               <li class="breadcrumb-item active">Company Info</li>
             </ol>
           </div><!-- /.col -->

@@ -17,7 +17,7 @@
     ============================================= -->
 
 
-        <!-- Start Faq With Left Sidebar
+        <!-- Start Content With Left Sidebar
     ============================================= -->
     <div class="faq-area left-sidebar course-details-area default-padding">
         <div class="container">
@@ -27,6 +27,7 @@
                         @php
                             $teacher = App\Models\Admin::where('id',$course->admin_id)->first();
                         @endphp
+
                         <h2>{{ $course->title }} by {{ $teacher->name }}</h2>
                     </div>
                 </div>
@@ -53,10 +54,19 @@
                                     <h4>Your Course</h4>
                                 </div>
                                 <div class="sidebar-info">
+                                    
                                     <ul>
                                         @foreach($contents as $key => $content)
                                             <li>
-                                                <a href="{{ route('user.contant',$content->id) }}">{{ $key+1 }}. {{ $content->title }}</a>
+                                                <a href="{{ route('user.course.contant',$content->id) }}" class="content">
+                                                    @if($content->view_status == 1)
+                                                        <i class="fas fa-eye"></i>
+                                                    @else
+                                                        <i class="fas fa-eye-slash"></i>
+                                                    @endif
+                                                    
+                                                    <p>{{ $key+1 }}. {{ $content->title }}</p>
+                                                </a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -67,22 +77,20 @@
                     </div>
                 </div>
                 <!-- End Sidebar -->
+                <!--start-course-content-->
                     <div class="col-md-8 faq-content">
                         <div class="card">
-                            <video width="700" height="450" controls>
-                                <source src="{{ asset('backend/courses_content/'.$course_contant->file) }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
                             <div class="card-body mt-3">
-                                <h2 class="card-title">{{ $course_contant->title }}</h2>
-                                <p class="card-text">{{ $course_contant->desctription }}</p>
+                                <h2 class="card-title">{{ $course->title }}</h2>
+                                <p class="card-text">{{ $course->desctription }}</p>
                             </div>
                         </div>
                     </div>
+                <!--end-course-content-->
             </div>
         </div>
     </div>
-    <!-- End Faq -->
+    <!-- End Content  -->
 
 
         <!-- Start Footer

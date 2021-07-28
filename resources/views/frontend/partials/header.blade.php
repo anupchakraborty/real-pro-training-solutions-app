@@ -68,12 +68,7 @@
                             <a href="{{ route('teacher') }}" >Teachers</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Event</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="event.html">Event Mixed Colum</a></li>
-                                <li><a href="event-2.html">Event Grid Colum</a></li>
-                                <li><a href="event-3.html">Event Carousel</a></li>
-                            </ul>
+                            <a href="{{ route('about') }}" >About Us</a>
                         </li>
                         <li>
                             <a href="{{ route('contact') }}">contact</a>
