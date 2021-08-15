@@ -84,7 +84,10 @@
                                             @endif
                                         </td>
                                         <td class="product-des" data-title="Description">
-                                            <p class="product-name"><a href="{{ route('course.details',$cart->course->id) }}">{{ $cart->course->title }}</a></p>
+                                            @php
+                                                $slug = \Illuminate\Support\Str::slug($cart->course->title);
+                                            @endphp
+                                            <p class="product-name"><a href="{{ route('course.details', ['id' => $cart->course->id,'slug' => $slug]) }}">{{ $cart->course->title }}</a></p>
                                             <p class="product-des">{{ $cart->course->description }}</p>
                                         </td>
                                         <td class="price" data-title="Price"><span>{{ $cart->course->price }} $</span></td>

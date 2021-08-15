@@ -48,14 +48,14 @@
                             @endphp
                             
                             @foreach($courses as $course)
+                                @php
+                                    $slug = \Illuminate\Support\Str::slug($course->title);
+                                @endphp
                                 <!-- Single Item -->
                                 <div class="col-md-4 col-sm-6 equal-height">
                                     <div class="item">
                                         <div class="thumb">
-                                            {{-- @php
-                                                $slug = Str::slug($course->title);
-                                            @endphp --}}
-                                            <a href="{{ route('course.details',$course->id) }}">
+                                            <a href="{{ route('course.details', ['id' => $course->id,'slug' => $slug]) }}">
                                                 <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="popular_image">
                                             </a>
                                             <div class="price">Price: ${{ $course->price }}</div>
@@ -77,13 +77,21 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h4><a href="{{ route('course.details',$course->id) }}">{{ $course->title }}</a></h4>
+                                            <h4><a href="{{ route('course.details', ['id' => $course->id,'slug' => $slug]) }}">{{ $course->title }}</a></h4>
                                             <p>
                                                 {{ $course->desctription }}
                                             </p>
-                                            <div class="bottom-info">
-                                                <a class="start-course" href="{{ route('user.contant',$course->id) }}">Start Now</a>
-                                            </div>
+                                            @php
+                                                $current_date = \Carbon\Carbon::today();
+                                            @endphp
+                                            
+                                            @if($current_date >= $course->started_date)
+                                                <div class="bottom-info">
+                                                    <a class="start-course" href="{{ route('user.contant',$course->id) }}">Start Now</a>
+                                                </div>
+                                            @else
+                                                <p class="start-course">Course will be started- {{ $course->started_date }} </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

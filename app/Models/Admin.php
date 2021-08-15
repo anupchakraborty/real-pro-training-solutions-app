@@ -56,4 +56,9 @@ class Admin extends Authenticatable
     	return $this->hasMany(Course::class);
     }
 
+    public function quizzes()
+    {
+    	return $this->hasMany(Quiz::class);
+    }
+
 }

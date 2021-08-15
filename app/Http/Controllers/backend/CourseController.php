@@ -69,6 +69,9 @@ class CourseController extends Controller
             'admin_id' => 'required',
             'price' => 'required',
             'duration' => 'required',
+            'started_date' => 'required',
+            'course_type' => 'required',
+            'course_session' => 'required',
             'image' => 'required | mimes:jpeg,jpg,png,PNG | max:1000',
         ]);
 
@@ -80,6 +83,9 @@ class CourseController extends Controller
         $course->desctription = $request->desctription;
         $course->price = $request->price;
         $course->duration = $request->duration;
+        $course->started_date = $request->started_date;
+        $course->course_type = $request->course_type;
+        $course->course_session = $request->course_session;
         $course->admin_id = $request->admin_id;
 
         if ($request->hasfile('image')) {
@@ -125,7 +131,8 @@ class CourseController extends Controller
 
         $course = Course::find($id);
         $admins  = Admin::all();
-        return view('backend.pages.courses.edit', compact('course', 'admins'));
+        $courses = Course::all();
+        return view('backend.pages.courses.edit', compact('course', 'admins','courses'));
     }
 
     /**
@@ -145,6 +152,9 @@ class CourseController extends Controller
             'admin_id' => 'required',
             'price' => 'required',
             'duration' => 'required',
+            'started_date' => 'required',
+            'course_type' => 'required',
+            'course_session' => 'required',
         ]);
         //dd($request->all());
         // Create New Course
@@ -154,6 +164,9 @@ class CourseController extends Controller
         $course->desctription = $request->desctription;
         $course->price = $request->price;
         $course->duration = $request->duration;
+        $course->started_date = $request->started_date;
+        $course->course_type = $request->course_type;
+        $course->course_session = $request->course_session;
         $course->admin_id = $request->admin_id;
 
         if ($request->hasfile('image')) {

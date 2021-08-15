@@ -19,8 +19,12 @@
     <script src="{{ asset('frontend/assets/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootsnav.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <!-- toster JavaScript -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- alertify JavaScript -->
     <script src="{{asset('frontend/assets/js/alertify.min.js')}}"></script>
+    <!-- JQurey Step js -->
+    <script src="{{asset('frontend/jquery.steps.js')}}"></script>
 
     @yield('scripts')
 

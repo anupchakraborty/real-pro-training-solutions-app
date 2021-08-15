@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Companyinfo;
 use App\Models\Course;
@@ -11,6 +12,7 @@ use App\Models\Admin;
 use App\Models\About;
 use App\Models\Slider;
 use App\Models\Studentregistation;
+use App\Models\Comment;
 use Mail;
 
 class HomeController extends Controller
@@ -93,5 +95,37 @@ class HomeController extends Controller
 
         session()->flash('success', 'Thank you For your email. Please Stay with us!!');
         return back();
+    }
+    //comments route are here
+    public function store(Request $request)
+    {
+        $data = request()->validate([
+            'comment' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        $comment = new Comment;
+        $comment->course_id = $request->course_id;
+        $id = Auth::guard('web')->user()->id;
+        if(!empty($id)){
+            $comment->user_id = $id;
+        }
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        $notification = array(
+            'message' => 'Comment has been Created !!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function Schedule()
+    {
+        //dd('okk');
+        $companyinfo = Companyinfo::first();
+        $courses = Course::all();
+        return view('frontend.pages.courses.course-schedule',compact('courses','companyinfo'));
     }
 }

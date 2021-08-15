@@ -15,6 +15,8 @@
     <link href="{{ asset('frontend/other.css') }}" rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" href="{{asset('frontend/assets/css/alertify.min.css')}}"/>
+    <!-- toster CSS -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <!-- ========== End Stylesheet ========== -->
 
     <!-- ========== Google Fonts ========== -->

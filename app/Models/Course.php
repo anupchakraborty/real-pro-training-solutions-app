@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $fillable = [
-        'title', 'feature', 'desctription','admin_id','price','duration','image'
+        'title', 'feature', 'desctription','admin_id','price','duration','started_date','courese_type','image'
     ];
 
     public function admin()
@@ -19,5 +19,15 @@ class Course extends Model
     public function contents()
     {
     	return $this->hasMany(Coursecontent::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
     }
 }

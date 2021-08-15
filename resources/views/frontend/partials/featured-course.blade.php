@@ -11,12 +11,38 @@
                                 <div class="thumb">
                                     <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb">
                                     <div class="live-view">
-                                        <a href="{{ asset('backend/img/courses/'.$course->image) }}" class="item popup-link">
-                                            <i class="fa fa-camera"></i>
-                                        </a>
-                                        <a class="popup-youtube" href="https://www.youtube.com/watch?v=vQqZIFCab9o">
-                                            <i class="fa fa-video"></i>
-                                        </a>
+                                        @if(!empty($course->courese_type))
+                                        <span class="badge badge-warning">
+                                            <i class="fas fa-bullhorn"></i>
+                                            @if($course->course_type == 'live_course')
+                                                Live Course
+                                            @elseif($course->course_type == 'online_course')
+                                                Online Course
+                                            @else
+
+                                            @endif
+                                        </span>
+                                        @else
+
+                                        @endif
+                                        @if(!empty($course->courese_session))
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-clipboard-list"></i>
+                                                @if($course->course_session == 'morining_session')
+                                                    Morining Session
+                                                @elseif($course->course_session == 'afternoon_session')
+                                                    Afternoon Session
+                                                @elseif($course->course_session == 'weekend_session')
+                                                    Weekend Session
+                                                @elseif($course->course_session == 'evening_session')
+                                                    Evening Session
+                                                @else
+                                                    
+                                                @endif
+                                            </span>
+                                        @else
+
+                                        @endif
                                     </div>
                                 </div>
                             </div>

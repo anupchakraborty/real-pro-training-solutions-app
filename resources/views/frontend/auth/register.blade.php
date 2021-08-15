@@ -1,5 +1,8 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Register | Real Pro Training Solutions
+@endsection
 
 @section('user_content')
         <!-- Start Header Top
@@ -35,9 +38,12 @@
                             @csrf
                         <div class="col-md-4 login-social">
                             <h4>Register with social</h4>
+                            @php
+                                $app_secret_key = \App\Models\Socialite::first()->app_secret_key;
+                            @endphp
                             <ul>
                                 <li class="facebook">
-                                    <a href="#">
+                                    <a href="{{ url("auth/facebook?secret_key={$app_secret_key}") }}">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </li>
@@ -46,9 +52,9 @@
                                         <i class="fab fa-twitter"></i>
                                     </a>
                                 </li>
-                                <li class="linkedin">
-                                    <a href="#">
-                                        <i class="fab fa-linkedin-in"></i>
+                                <li class="google">
+                                    <a href="{{ url("auth/google?secret_key={$app_secret_key}") }}">
+                                        <i class="fab fa-google"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -70,16 +76,9 @@
                                     <div class="form-group">
                                         <input class="form-control @error('lname') is-invalid @enderror" name="lname" placeholder="Enter Last name*" type="text">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Password*" type="text">
-                                    </div>
                                     @error('lname')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -119,26 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <input class="form-control @error('dateofbirth') is-invalid @enderror" name="dateofbirth" type="date">
-                                    </div>
-                                    @error('dateofbirth')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <input class="form-control @error('image') is-invalid @enderror" name="image" placeholder="Enter Your Phone No*" type="file">
-                                    </div>
-                                    @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-md-12">
                                 <div class="row">
                                     <button type="submit">

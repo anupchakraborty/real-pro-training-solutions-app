@@ -68,6 +68,22 @@
                                                     <p>{{ $key+1 }}. {{ $content->title }}</p>
                                                 </a>
                                             </li>
+                                            @php
+                                                $quizzies = App\Models\Quiz::where('course_id', $course->id)->get();
+                                            @endphp
+
+                                            @foreach ($quizzies as $quiz)
+                                                @if($quiz->content_id == $content->id)
+                                                    <li>
+                                                        <a href="{{ route('user.course.contant.quiz',['course_id'=>$course->id, 'content_id' =>$content->id, 'quiz_id'=>$quiz->id]) }}">
+                                                            <i class="fas fa-clock"></i>
+                                                            <p>{{ $quiz->quiz_name }}</p>
+                                                        </a>
+                                                    </li>  
+                                                @else
+
+                                                @endif 
+                                            @endforeach
                                         @endforeach
                                     </ul>
                                 </div>

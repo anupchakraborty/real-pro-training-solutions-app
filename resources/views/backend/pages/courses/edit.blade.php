@@ -75,6 +75,73 @@
                          <span class="text-danger">{{ $message }}</span>
                     @enderror
                     <div class="form-group col-md-12">
+                        <label for="started_date">Course Started Date</label>
+                        <input type="date" class="form-control" id="started_date" name="started_date" value="{{ $course->started_date }}">
+                    </div>
+                    @error('started_date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="form-group col-md-12">
+                        <label for="duration">Course Type</label>
+                        <select name="course_type" id="course_type" class="form-control">
+                                @if($course->course_type == 'online_course')
+                                    <option value="{{ $course->course_type }}"{{ ($course->course_type == 'online_course') ? 'selected':'' }}>Online Course</option>
+                                    <option value="live_course">Live Course</option>
+                                @elseif($course->course_type == 'live_course')
+                                    <option value="{{ $course->course_type }}"{{ ($course->course_type == 'live_courese') ? 'selected':'' }}>Live Course</option>
+                                    <option value="online_course">Online Course</option>
+                                @else
+                                    <option selected>Select Course Type</option>
+                                    <option value="online_course">Online Course</option>
+                                    <option value="live_course">Live Course</option>
+                                @endif
+                        </select>
+                    </div>
+                    @error('duration')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="form-group col-md-12">
+                        <label for="duration">Course Sessions</label>
+                        <select name="course_session" id="course_session" class="form-control">
+                                @if($course->course_session == 'morining_session')
+                                    <option value="{{ $course->course_session }}"{{ ($course->course_session == 'morining_session')? 'selected':'' }}>Morining Session</option>
+                                    <option value="afternoon_session">Afternon Session</option>
+                                    <option value="weekend_session">Weekend Session</option>
+                                    <option value="evening_session">Evening Session</option>   
+                                @elseif($course->course_session == 'afternoon_session')
+                                    <option value="{{ $course->course_session }}"{{ ($course->course_session == 'afternoon_session')? 'selected':'' }}>Afternon Session</option>
+                                    <option value="morining_session">Morining Session</option>
+                                    <option value="weekend_session">Weekend Session</option>
+                                    <option value="evening_session">Evening Session</option>       
+                                @elseif($course->course_session == 'weekend_session')
+                                    <option value="{{ $course->course_session }}"{{ ($course->course_session == 'weekend_session')? 'selected':'' }}>Weekend Session</option>
+                                    <option value="morining_session">Morining Session</option>
+                                    <option value="afternoon_session">Afternon Session</option>
+                                    <option value="evening_session">Evening Session</option>  
+                                @elseif($course->course_session == 'evening_session')
+                                    <option value="{{ $course->course_session }}"{{ ($course->course_session == 'evening_session')? 'selected':'' }}>Evening Session</option>
+                                    <option value="morining_session">Morining Session</option>
+                                    <option value="afternoon_session">Afternon Session</option>
+                                    <option value="weekend_session">Weekend Session</option>
+                                @else
+                                    <option selected>Select Course Session</option>
+                                    <option value="morining_session">Morining Session</option>
+                                    <option value="afternoon_session">Afternon Session</option>
+                                    <option value="weekend_session">Weekend Session</option>
+                                    <option value="evening_session">Evening Session</option>     
+                                @endif
+                        </select>
+                    </div>
+                    @error('duration')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="form-group col-md-12">
                         <label for="admin_id">Author</label>
                         <select name="admin_id" id="admin_id" class="form-control @error('admin_id') is-invalid @enderror">
                             <option selected>Select One Author</option>

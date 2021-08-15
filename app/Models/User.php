@@ -22,13 +22,16 @@ class User extends Authenticatable
         'fname',
         'lname',
         'email',
+        'password',
         'dateofbirth',
         'phone',
         'address',
         'about_you',
         'image',
         'status',
-        'remember_token'
+        'remember_token',
+        'provider_id',
+        'provider_type'
     ];
 
     /**

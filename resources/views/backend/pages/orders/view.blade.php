@@ -41,13 +41,12 @@
                         @foreach($carts as $cart)
                         <div class="card">
                             @php
-                                $product = App\Models\Product::where('id', $cart->product_id)->first();
-                                $Image = App\Models\ProductImage::where('product_id', $product->id)->first();
+                                $course = App\Models\Course::where('id', $cart->course_id)->first();
                             @endphp
                             <div class="card-body">
-                                <img src="{{ asset('backend/img/products/'.$Image->image) }}" alt="" style="width:550px; height:400px;">
-                                <h4 class="mt-2 ml-3">Product Name: {{ $product->product_title }}</h4>
-                                <p class="mt-2 ml-3">Product Description: {{ $product->product_description }}</p>
+                                <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="" style="width:550px; height:400px;">
+                                <h4 class="mt-2 ml-3">Course Name: {{ $course->title }}</h4>
+                                <p class="mt-2 ml-3">Course Description: {{ $course->desctription }}</p>
                             </div>
                         </div>
                         @endforeach
@@ -95,25 +94,25 @@
 
                             @foreach ($carts as $cart)
                                 @php
-                                    $product = App\Models\Product::where('id', $cart->product_id)->first();
+                                    $course = App\Models\Course::where('id', $cart->course_id)->first();
                                     $total_price = 0;
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->index+1 }}</td>
-                                    <td>{{ $product->product_title }}</td>
-                                    <td>{{ $product->quantity }}</td>
-                                    <td>{{ $product->buy_price }}</td>
+                                    <td>{{ $course->title }}</td>
+                                    <td>{{ $course->course_quantity }}</td>
+                                    <td>${{ $course->price }}</td>
                                     <td>
                                         @php
-                                                $total_price += $cart->product_quantity * $cart->product->buy_price;
+                                                $total_price += $cart->course_quantity * $cart->course->price;
                                         @endphp
-                                            {{ $cart->product_quantity * $cart->product->buy_price }} TK
+                                            ${{ $cart->course_quantity * $cart->course->price }}
                                     </td>
                                 </tr>
                             @endforeach
                                 <tr>
                                     <td colspan="4">Total</td>
-                                    <td>{{ $total_price }} Tk</td>
+                                    <td>${{ $total_price }}</td>
                                 </tr>
                         </tbody>
                     </table>

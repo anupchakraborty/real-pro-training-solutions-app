@@ -25,18 +25,25 @@ Auth::routes();
     Route::get('about/', 'App\Http\Controllers\Frontend\HomeController@about')->name('about');
     Route::get('teacher/', 'App\Http\Controllers\Frontend\HomeController@teacher')->name('teacher');
     Route::get('contact/', 'App\Http\Controllers\Frontend\HomeController@contact')->name('contact');
-    // Route::get('contact/email', 'App\Http\Controllers\HomeController@create');
+    // email route are here
     Route::post('contact/email', 'App\Http\Controllers\Frontend\\HomeController@sendEmail')->name('send.email');
-    Route::get('courses/', 'App\Http\Controllers\Frontend\CourseController@course_show')->name('courses');
-    Route::get('courses/{id}/', 'App\Http\Controllers\Frontend\CourseController@course_details')->name('course.details');
-
+    //schedule
+    Route::get('course/schedule', 'App\Http\Controllers\Frontend\HomeController@Schedule')->name('course.schedule');
+    //courses route are here
+    Route::get('course/', 'App\Http\Controllers\Frontend\CourseController@course_show')->name('courses');
+    Route::get('course/{id}/{slug}', 'App\Http\Controllers\Frontend\CourseController@course_details')->name('course.details');
+    Route::get('course/{type}', 'App\Http\Controllers\Frontend\CourseController@course_type')->name('course.type');
+    //comment route are here
+    Route::post('/comments/{id}', 'App\Http\Controllers\Frontend\HomeController@store')->name('user.comments.store');
     /*----------------------------------------------
         Login and Logout route are here
-    |-----------------------------------------------*/
+    |------------------------------------------------*/
     Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
     Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('/login/submit', 'App\Http\Controllers\Auth\LoginController@login')->name('login.submit');
-    
+    //social Login
+    Route::get('/auth/{social}','App\Http\Controllers\Auth\SocialLoginController@socialLogin')->where('social','facebook|google');
+    Route::get('/auth/{social}/callback','App\Http\Controllers\Auth\SocialLoginController@handleProviderCallback')->where('social','facebook|google');
     //Logout Route are here
     Route::post('/logout/user', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout.user');
 
@@ -45,8 +52,11 @@ Auth::routes();
 		Route::get('/token/{token}', 'App\Http\Controllers\Auth\VerificationController@verify')->name('user.verification');
         Route::get('dashboard/', 'App\Http\Controllers\Frontend\DashboardController@index')->name('dashboard');
         Route::get('profile/', 'App\Http\Controllers\Frontend\DashboardController@profile')->name('user.profile');
+        Route::post('password/update/{id}', 'App\Http\Controllers\Frontend\DashboardController@password_update')->name('user.password.update');
+        Route::post('profile/update/{id}', 'App\Http\Controllers\Frontend\DashboardController@profile_update')->name('user.profile.update');
         Route::get('dashboard/course/{course_id}', 'App\Http\Controllers\Frontend\DashboardController@course')->name('user.contant');
         Route::get('dashboard/course/content/{content_id}', 'App\Http\Controllers\Frontend\DashboardController@course_contant')->name('user.course.contant');
+        Route::get('dashboard/course/{course_id}/content/{content_id}/quiz/{quiz_id}', 'App\Http\Controllers\Frontend\DashboardController@contant_quiz')->name('user.course.contant.quiz');
     });
     //Carts Route are here
     Route::group(['prefix' => 'carts'], function(){
@@ -87,6 +97,14 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('courses', 'App\Http\Controllers\backend\CourseController', ['names'=>'admin.course']);
     Route::resource('course-contents', 'App\Http\Controllers\backend\CourseContentController', ['names'=>'admin.course.content']);
     /*----------------------------------------------
+        Quiz & Qustion route are here
+    |-----------------------------------------------*/
+    Route::resource('quiz', 'App\Http\Controllers\backend\QuizController', ['names'=>'admin.course.content.quiz']);
+    Route::resource('question', 'App\Http\Controllers\backend\QuestionController', ['names'=>'admin.course.content.question']);
+    //comment route are here
+    Route::get('/comments/index', 'App\Http\Controllers\backend\CommentController@index')->name('admin.comments.index');
+    Route::delete('/comments/{id}', 'App\Http\Controllers\backend\CommentController@destory')->name('admin.comments.destory');
+    /*----------------------------------------------
         Company Info route are here
     |-----------------------------------------------*/
     Route::get('company-info','App\Http\Controllers\backend\CompanyinfoController@index')->name('admin.companyinfo.index');
@@ -117,6 +135,11 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('slider/{id}/edit','App\Http\Controllers\backend\SliderController@edit')->name('admin.sliders.edit');
     Route::post('slider/{id}/update','App\Http\Controllers\backend\SliderController@update')->name('admin.sliders.update');
     Route::post('slider/{id}/delete','App\Http\Controllers\backend\SliderController@destroy')->name('admin.sliders.destroy');
+    /*----------------------------------------------
+        App Setting route are here
+    |-----------------------------------------------*/
+    Route::get('/app-setting/socialite', 'App\Http\Controllers\backend\SocialiteController@index')->name('admin.socialite.index');
+    Route::put('/app-setting/socialite/{id}/update', 'App\Http\Controllers\backend\SocialiteController@update')->name('admin.socialite.update');
     /*----------------------------------------------
         Login and Logout route are here
     |-----------------------------------------------*/

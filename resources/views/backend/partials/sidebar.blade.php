@@ -135,6 +135,48 @@ $usr = Auth::guard('admin')->user();
             </ul>
           </li>
           @endif
+          <li class="nav-item has-treeview {{ Route::is('admin.course.content.quiz.create') || Route::is('admin.course.content.quiz.index') || Route::is('admin.course.content.quiz.edit') || Route::is('admin.course.content.quiz.show') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-cloudscale"></i>
+              <p>  Quiz  <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ Route('admin.course.content.quiz.create') }}" class="nav-link {{ route::is('admin.course.content.quiz.create')  ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Quiz</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ Route('admin.course.content.quiz.index') }}" class="nav-link {{ route::is('admin.course.content.quiz.index')  ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Quiz</p>
+                </a>
+              </li>
+              <li class="nav-item has-treeview {{ Route::is('admin.course.content.question.create') || Route::is('admin.course.content.question.index') || Route::is('admin.course.content.question.edit') || Route::is('admin.course.content.question.show') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fab fa-cloudscale"></i>
+                  <p>  Question  <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ Route('admin.course.content.question.create') }}" class="nav-link {{ route::is('admin.course.content.question.create')  ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Create Question</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ Route('admin.course.content.question.index') }}" class="nav-link {{ route::is('admin.course.content.question.index')  ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Question</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item has-treeview {{ Route::is('admin.orders.create') || Route::is('admin.orders.index') || Route::is('admin.orders.edit') || Route::is('admin.orders.show') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fab fa-cloudscale"></i>
@@ -180,6 +222,21 @@ $usr = Auth::guard('admin')->user();
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview {{ Route::is('admin.comments.index') || Route::is('admin.comments.destory') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-envelope"></i>
+              <p>  Comments  <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.comments.index') }}" class="nav-link {{ route::is('admin.comments.index')  ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                  <p>All Comments</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item has-treeview {{ Route::is('admin.companyinfo.index') || Route::is('admin.companyinfo.edit') || Route::is('admin.companyinfo.update') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-clipboard-list"></i>
@@ -201,6 +258,25 @@ $usr = Auth::guard('admin')->user();
               </li>
             </ul>
           </li>
+          {{-- @if ($usr->can('app_setting.socialite')) --}}
+            <li class="nav-item has-treeview {{ Route::is('admin.socialite.index') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-wrench"></i>
+                <p>App Settings <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                {{-- @if ($usr->can('app_setting.socialite')) --}}
+                  <li class="nav-item">
+                    <a href="{{ route('admin.socialite.index') }}" class="nav-link {{ route::is('admin.socialite.index')  ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Socialite</p>
+                    </a>
+                  </li>
+                {{-- @endif --}}
+              </ul>
+            </li>
+          {{-- @endif --}}
       </nav>
       <!-- /.sidebar-menu -->
     </div>

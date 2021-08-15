@@ -16,13 +16,55 @@
                 <div class="col-md-12">
                     <div class="popular-courses-items popular-courses-carousel owl-carousel owl-theme">
                         @foreach($courses as $course)
-                            <!-- Single Item -->
+                            @php
+                                $slug = \Illuminate\Support\Str::slug($course->title);
+                            @endphp
+                            <!-- Single Item --->
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="{{ route('course.details',$course->id) }}">
+                                    <a href="{{ route('course.details', ['id' => $course->id,'slug' => $slug]) }}">
                                         <img src="{{ asset('backend/img/courses/'.$course->image) }}" alt="Thumb" id="course_image">
+                                        <div class="live-view">
+                                            @if(!empty($course->course_type))
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-bullhorn"></i>
+                                                @if($course->course_type == 'live_course')
+                                                    Live Course
+                                                @elseif($course->course_type == 'online_course')
+                                                    Online Course
+                                                @else
+    
+                                                @endif
+                                            </span>
+                                            @else
+    
+                                            @endif
+                                            @if(!empty($course->course_session))
+                                                <span class="badge badge-warning">
+                                                    <i class="fas fa-clipboard-list"></i>
+                                                    @if($course->course_session == 'morining_session')
+                                                        Morining Session
+                                                    @elseif($course->course_session == 'afternoon_session')
+                                                        Afternoon Session
+                                                    @elseif($course->course_session == 'weekend_session')
+                                                        Weekend Session
+                                                    @elseif($course->course_session == 'evening_session')
+                                                        Evening Session
+                                                    @else
+                                                        
+                                                    @endif
+                                                </span>
+                                            @else
+    
+                                            @endif
+                                        </div>
                                     </a>
                                     <div class="price">Price: ${{ $course->price }}</div>
+                                    @if(!empty($course->started_date))
+                                        <div class="price">Course Started: {{ $course->started_date }}</div>
+                                    @else
+
+                                    @endif
                                 </div>
                                 <div class="info">
                                     <div class="author-info">
@@ -41,7 +83,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h4><a href="{{ route('course.details',$course->id) }}">{{ $course->title }}</a></h4>
+                                    <h4><a href="{{ route('course.details', ['id' => $course->id,'slug' => $slug]) }}">{{ $course->title }}</a></h4>
                                     <p>
                                         {{ \Illuminate\Support\Str::limit($course->desctription, 150, $end='...') }}
                                     </p>

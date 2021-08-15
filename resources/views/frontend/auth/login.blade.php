@@ -1,5 +1,8 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Login | Real Pro Training Solutions
+@endsection
 
 @section('user_content')
         <!-- Start Header Top

@@ -39,14 +39,16 @@
             <thead>
             <tr>
                 <th width="5%">Sl</th>
-                <th width="20%">Title</th>
-                <th width="20%">Feature</th>
+                <th width="15%">Title</th>
                 <th width="10%">Price</th>
                 <th width="10%">Duration</th>
+                <th width="10%">Started Date</th>
+                <th width="10%">Course Type</th>
+                <th width="10%">Course Sessions</th>
                 <th width="10%">Author</th>
                 <th width="10%">Image</th>
                 @if(Auth::guard('admin')->user()->can('course.edit') || Auth::guard('admin')->user()->can('course.delete') )
-                <th width="15%">Action</th>
+                <th width="10%">Action</th>
                 @endif
             </tr>
             </thead>
@@ -55,9 +57,31 @@
                     <tr>
                         <td>{{ $loop->index+1 }}</td>
                         <td>{{ $course->title }}</td>
-                        <td>{{ $course->feature }}</td>
-                        <td>{{ $course->price }} $</td>
+                        <td>$ {{ $course->price }}</td>
                         <td>{{ $course->duration }} Hours</td>
+                        <td>{{ $course->started_date }}</td>
+                        <td>
+                            @if($course->course_type == 'online_course')
+                                Online Course
+                            @elseif($course->course_type == 'live_course')
+                                Live Course
+                            @else
+
+                            @endif
+                        </td>
+                        <td>
+                            @if($course->course_session == 'morining_session')
+                                Morining Session
+                            @elseif($course->course_session == 'afternoon_session')
+                                Afternon Session
+                            @elseif($course->course_session == 'weekend_session')
+                                Weekend Session
+                            @elseif($course->course_session == 'evening_session')
+                                Evening Session
+                            @else
+                            
+                            @endif
+                        </td>
                         <td>
                             @php
                                 $admin = App\Models\Admin::where('id',$course->admin_id)->first();
@@ -68,11 +92,11 @@
 
                         <td style="text-align:center;">
                             @if(Auth::guard('admin')->user()->can('course.edit'))
-                            <a class="btn btn-success text-white" href="{{ route('admin.course.edit', $course->id) }}">
+                            <a class="btn btn-success btn-sm text-white" href="{{ route('admin.course.edit', $course->id) }}">
                                 <i class="fas fa-edit"></i></a>
                             @endif
                             @if(Auth::guard('admin')->user()->can('course.delete'))
-                            <a class="btn btn-danger text-white" href="#delete-form{{ $course->id }}" data-toggle="modal">
+                            <a class="btn btn-danger btn-sm text-white" href="#delete-form{{ $course->id }}" data-toggle="modal">
                                 <i class="fas fa-trash"></i>
                                 </a>
                             @endif
@@ -110,14 +134,16 @@
             <tfoot>
             <tr>
                 <th width="5%">Sl</th>
-                <th width="20%">Title</th>
-                <th width="20%">Feature</th>
+                <th width="15%">Title</th>
                 <th width="10%">Price</th>
                 <th width="10%">Duration</th>
+                <th width="10%">Started Date</th>
+                <th width="10%">Course Type</th>
+                <th width="10%">Course Sessions</th>
                 <th width="10%">Author</th>
                 <th width="10%">Image</th>
                 @if(Auth::guard('admin')->user()->can('course.edit') || Auth::guard('admin')->user()->can('course.delete') )
-                <th width="15%">Action</th>
+                <th width="10%">Action</th>
                 @endif
             </tr>
             </tfoot>

@@ -18,6 +18,10 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->string('feature');
             $table->text('desctription')->nullable();
+            $table->integer('price');
+            $table->integer('duration');
+            $table->string('started_date');
+            $table->string('courese_type');
             $table->unsignedBigInteger('admin_id');
             $table->string('image')->nullable();
             $table->timestamps();

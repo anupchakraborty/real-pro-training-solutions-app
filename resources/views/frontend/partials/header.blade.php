@@ -61,7 +61,7 @@
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Courses</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('courses') }}">Popular Courses</a></li>
-                                <li><a href="courses-2.html">Feature Courses</a></li>
+                                <li><a href="{{ route('course.schedule') }}">Courses Schedule</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

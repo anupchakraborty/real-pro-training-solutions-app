@@ -102,41 +102,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>01.</td>
-                                                    <td><a href="#">Basic Web Development</a></td>
-                                                    <td>12 Nov, 2018</td>
-                                                    <td>$23.00</td>
-                                                    <td><a href="#">Preview</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>02.</td>
-                                                    <td><a href="#">Software Engineering</a></td>
-                                                    <td>14 Jan, 2019</td>
-                                                    <td>$55.00</td>
-                                                    <td><a href="#">Preview</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>03.</td>
-                                                    <td><a href="#">Introduction of machine</a></td>
-                                                    <td>18 Mar, 2019</td>
-                                                    <td>$44.00</td>
-                                                    <td><a href="#">Preview</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>04.</td>
-                                                    <td><a href="#">Hidden potential</a></td>
-                                                    <td>20 Feb, 2018</td>
-                                                    <td>$54.00</td>
-                                                    <td><a href="#">Preview</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>05.</td>
-                                                    <td><a href="#">Introduction of PHP</a></td>
-                                                    <td>27 Mar, 2019</td>
-                                                    <td>$32.00</td>
-                                                    <td><a href="#">Preview</a></td>
-                                                </tr>
+                                                @foreach($orders as $key => $order)
+                                                    <tr>
+                                                        <td>#RPTS021{{ $key+1 }}</td>
+                                                            @php
+                                                                $cart = App\Models\Cart::where('order_id',$order->id)->first();
+                                                                $course = App\Models\Course::where('id',$cart->course_id)->first();
+                                                            @endphp
+                                                        <td><a href="#">{{ $course->title }}</a></td>
+                                                        <td>{{ $order->created_at }}</td>
+                                                        <td>${{ $course->price }}</td>
+                                                        <td><a href="#">Preview</a></td>
+                                                    </tr>                                                  
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -148,29 +126,70 @@
                             <div id="tab3" class="tab-pane">
                                 <div class="info title">
                                     <p>
-                                        Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. Expect relied do we genius is. On as around spirit of hearts genius. Is raptures daughter branched laughter peculiar in settling.
+                                        {{ $user->about_you }}
                                     </p>
                                     <div class="row">
-                                        <form action="#" class="contact-form">
+                                        <form action="{{ route('user.profile.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <input class="form-control" placeholder="Name" type="text">
+                                                    <label>First Name</label>
+                                                    <input class="form-control" name="fname" value="{{ $user->fname }}" type="text">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <input class="form-control" placeholder="Email" type="email">
+                                                    <label>Last Name</label>
+                                                    <input class="form-control" name="lname" value="{{ $user->lname }}" type="text">
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input class="form-control" name="email" value="{{ $user->email }}" type="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input class="form-control" name="phone" value="{{ $user->phone }}" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Date of Birth</label>
+                                                    <input class="form-control" name="dateofbirth" type="date">
+                                                </div>
+                                                @error('dateofbirth')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Upload Your Profile Picture</label>
+                                                    <input class="form-control" name="image" type="file">
+                                                </div>
+                                                @error('image')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input class="form-control" placeholder="Phone" type="text">
+                                                    <label>Address</label>
+                                                    <input class="form-control" name="address" type="text">
                                                 </div>
+                                                @error('address')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group comments">
-                                                    <textarea class="form-control" placeholder="About Yourself"></textarea>
+                                                    <label>Tell Me About You</label>
+                                                    <textarea name="about_you" placeholder="About You" class="form-control"></textarea>
                                                 </div>
+                                                @error('about_you')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-md-12">
                                                 <button type="submit">
@@ -182,29 +201,35 @@
                                     <div class="update-pass">
                                         <h4>Change Password</h4>
                                         <p>
-                                            Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. Expect relied do we genius is. On as around spirit of hearts genius. Is raptures daughter branched laughter peculiar in settling.
+                                            Please Be carefull! when you fill the information. If you face any help then contact us.
                                         </p>
                                         <div class="row">
-                                            <form action="#" class="contact-form">
+                                            
+                                            <form action="{{ route('user.password.update',$user->id) }}" method="POST">
+                                                @csrf
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input class="form-control" placeholder="Chose Password" type="text">
+                                                        <input class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Chose Password" type="password">
                                                     </div>
+                                                    @error('password')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input class="form-control" placeholder="Retype Password" type="text">
+                                                        <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Retype Password" type="password">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input class="form-control" placeholder="Old Password" type="text">
+                                                        <input class="form-control @error('old_password') is-invalid @enderror" placeholder="Old Password" name="old_password" type="password">
                                                     </div>
+                                                    @error('old_password')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <button type="submit">
-                                                        Update
-                                                    </button>
+                                                    <button type="submit">Update</button>
                                                 </div>
                                             </form>
                                         </div>

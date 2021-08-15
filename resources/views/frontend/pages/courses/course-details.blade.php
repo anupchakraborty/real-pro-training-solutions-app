@@ -30,7 +30,7 @@
     ============================================= -->
         <!-- Start Breadcrumb
     ============================================= -->
-    <div class="breadcrumb-area shadow dark text-center bg-fixed text-light" style="background-image: url({{ asset('frontend/assets/img/banner/2.jpg') }});">
+    <div class="breadcrumb-area shadow dark text-center bg-fixed text-light" style="background-image: url({{ asset('frontend/assets/img/banner/8.jpg') }});">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -79,21 +79,24 @@
                                     </div>
                                 </div>
                                 <div class="item category">
-                                    <h4>Category</h4>
-                                    <a href="#">Science</a>
+                                    <h4>Course Type</h4>
+                                    <span>
+                                        @if($course->course_type == 'live_course')
+                                            Live Course
+                                        @elseif($course->course_type == 'online_course')
+                                            Online Course
+                                        @else
+
+                                        @endif
+                                    </span>
                                 </div>
                                 <div class="item rating">
-                                    <h4>Rating</h4>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <span>4.5 (16)</span>
+                                    <h4>Started</h4>
+                                    <span>{{ $course->started_date }}</span>
                                 </div>
                                 <div class="item price">
                                     <h4>Price</h4>
-                                    <span>{{ $course->price }} $</span>
+                                    <span>${{ $course->price }}</span>
                                 </div>
                                 <div class="align-right">
                                     @if(!empty(Auth::guard('web')->user()->id))
@@ -160,15 +163,16 @@
                                 <!-- Single Tab -->
                                 <div id="tab2" class="tab-pane fade">
                                     <div class="info title">
-                                        <p>
-                                            Placing assured be if removed it besides on. Far shed each high read are men over day. Afraid we praise lively he suffer family estate is. Ample order up in of in ready. Timed blind had now those ought set often which. Or snug dull he show more true wish. No at many deny away miss evil. On in so indeed spirit an mother. Amounted old strictly but marianne admitted. People former is remove remain as.
-                                        </p>
-                                        <h4>List Of Courses</h4>
                                         @php
                                             $teacher_id = $course->admin_id;
                                             $courses = App\Models\Course::where('admin_id',$teacher_id)->get();
                                         @endphp
                                         @foreach($courses as $course)
+                                        <h4>Courses Desctription</h4>
+                                        <p>
+                                            {{ $course->desctription }}
+                                        </p>
+                                        <h4>List Of Courses</h4>
                                         <!-- Start Course List -->
                                         <div class="course-list-items acd-items acd-arrow">
                                             <div class="panel-group symb" id="accordion">
@@ -196,14 +200,8 @@
                                                                         <h5>{{ $content->title }}</h5>
                                                                     </div>
                                                                     <div class="item info">
-                                                                        <span>Duration: 
-                                                                            @php
-                                                                                $getID3 = new getID3;
-                                                                                $file = $getID3->analyze($content->file);
-                                                                            @endphp
-                                                                            
-                                                                             {{ $file['playtime_string'] }}
-                                                                            {{-- 1 hours 30 min --}}
+                                                                        <span>Duration:
+                                                                         {{ $duration }}
                                                                         </span>
                                                                        <a href="#">Preview</a>
                                                                     </div>
@@ -310,6 +308,83 @@
                             <!-- End Tab Content -->
                         </div>
                         <!-- End Tab Info -->
+
+                        <!-- start-comments -->
+                            <!--/.Comments-->
+                        <div class="container">
+                            <div class="be-comment-block">
+                            <h1 class="comments-title">Comments {{ $course->id }}</h1>
+                            @php
+                                $comments = App\Models\Comment::where('course_id', $course->id)->get();
+                            @endphp
+                                @foreach ($comments as $comment)
+                                    @if($comment->course_id == $course->id)
+                                        @php
+                                            $id = $comment->user_id;
+                                            $user = App\Models\User::where('id',$id)->first();
+                                        @endphp
+                                    <div class="be-comment">
+                                        <div class="be-img-comment">
+                                        <a href="blog-detail-2.html">
+                                            <img src="{{ URL::To('frontend/assets/img/profile/'.$user->image) }}" alt="" class="be-ava-comment">
+                                        </a>
+                                        </div>
+                                        <div class="be-comment-content">
+                                            <span class="be-comment-name">
+                                            <a href="blog-detail-2.html">
+                                                {{ $user->fname }} {{ $user->lname }}
+                                            </a>
+                                            </span>
+                                            <span class="be-comment-time">
+                                                <i class="fa fa-clock-o"></i>
+                                                {{ $comment->created_at->format('D,d,M,Y') }}
+                                            </span>
+                                            <p class="be-comment-text">
+                                            {{ $comment->comment }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    @else
+                                        <div class="be-comment">
+                                            <strong>No Comments Yet !!</strong>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                            <!--/.Comments-->
+                        <!--/.Reply-->
+                            <form class="form-block" action="{{ route('user.comments.store',$course->id) }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group fl_icon">
+                                            <div class="icon"><i class="fa fa-user"></i></div>
+                                            <input class="form-input" type="text" name="name" placeholder="Your name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 fl_icon">
+                                        <div class="form-group fl_icon">
+                                            <div class="icon"><i class="fas fa-envelope"></i></div>
+                                            <input class="form-input" type="text" name="email" placeholder="Your email">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <textarea class="form-input" name="comment" required="" placeholder="Your text" aria-describedby="commentHelp"></textarea>
+                                            @error('comment')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary pull-right">submit</button>
+                                </div>
+                            </form>
+                        <!--/.Reply-->
+                        <!-- end-comments -->
                     </div>
                 </div>
                 <!-- Start Sidebar -->
@@ -337,24 +412,22 @@
                                     $courses = App\Models\Course::all();
                                 @endphp
                                 @foreach($courses as $popular_course)
+                                    @php
+                                        $slug = \Illuminate\Support\Str::slug($popular_course->title);
+                                    @endphp
                                     <div class="item">
                                         <div class="content">
                                             <div class="thumb">
-                                                <a href="#">
+                                                <a href="{{ route('course.details', ['id' => $popular_course->id,'slug' => $slug]) }}">
                                                     <img src="{{ asset('backend/img/courses/'.$popular_course->image) }}" alt="Thumb">
                                                 </a>
                                             </div>
                                             <div class="info">
                                                 <h4>
-                                                    <a href="#">{{ $popular_course->title }}</a>
+                                                    <a href="{{ route('course.details', ['id' => $popular_course->id,'slug' => $slug]) }}">{{ $popular_course->title }}</a>
                                                 </h4>
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                    <span>4.5 (23,890)</span>
+                                                <div class="meta">
+                                                    <span>Course Started: {{ $popular_course->started_date }}</span>
                                                 </div>
                                                 <div class="meta">
                                                     <i class="fas fa-user"></i> By <a href="#">{{ $popular_course->admin->name }}</a>

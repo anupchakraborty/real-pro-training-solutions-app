@@ -62,8 +62,6 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required','max:12'],
-            'dateofbirth' => ['required', 'date'],
-            'image' => ['required', 'mimes:jpeg,jpg,png,PNG | max:100'],
         ]);
     }
 
@@ -82,16 +80,6 @@ class RegisterController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->phone = $request->phone;
-        $user->dateofbirth = $request->dateofbirth;
-
-        if ($request->hasfile('image')) {
-            // File store in public folder------
-            $image = $request->file('image'); //catch File from input field
-            $extension = $image->getClientOriginalExtension(); //File extension define
-            $filename = time().'.'.$extension; //File filename define
-            $image->move('frontend/assets/img/profile/',$filename); //File location define im public folder
-            $user->image = $filename; //File name save in db
-        }
         $user->remember_token = Str::random(40);
         $user->status = 0;
         $user->save();

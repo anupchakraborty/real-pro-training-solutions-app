@@ -86,6 +86,43 @@
                         </span>
                     @enderror
                     <div class="form-group col-md-12">
+                        <label for="started_date">Course Started Date</label>
+                        <input type="date" class="form-control" id="started_date" name="started_date" placeholder="Enter Your Course started_date">
+                    </div>
+                    @error('started_date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="form-group col-md-12">
+                        <label for="duration">Course Type</label>
+                        <select name="course_type" id="courese_type" class="form-control">
+                            <option selected>Select Course Type</option>
+                            <option value="online_course">Online Course</option>
+                            <option value="live_courese">Live Course</option>
+                        </select>
+                    </div>
+                    @error('duration')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="form-group col-md-12">
+                        <label for="duration">Course Sessions</label>
+                        <select name="course_session" id="courese_session" class="form-control">
+                            <option selected>Select Course Session</option>
+                            <option value="morining_session">Morining Session</option>
+                            <option value="afternoon_session">Afternon Session</option>
+                            <option value="weekend_session">Weekend Session</option>
+                            <option value="evening_session">Evening Session</option>
+                        </select>
+                    </div>
+                    @error('duration')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <div class="form-group col-md-12">
                         <label for="admin_id">Author</label>
                         <select name="admin_id" id="admin_id" class="form-control">
                             <option checked>Select One Author</option>
